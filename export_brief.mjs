@@ -7,7 +7,28 @@
  */
 import {sectors, audiences, formats, generate, brief} from './engine.mjs';
 
+const USAGE = 'Usage: node export_brief.mjs --list | node export_brief.mjs --sector <0-11> --audience "<audience>" --format <service|toolkit|subscription> --budget <0-1000000> [--seed <n>] [--json]';
+const VALUE_FLAGS = new Set(['--sector', '--audience', '--format', '--budget', '--seed']);
+const BOOL_FLAGS = new Set(['--list', '-l', '--json']);
+
 const args = process.argv.slice(2);
+for (let i = 0; i < args.length; i++) {
+ const a = args[i];
+ if (BOOL_FLAGS.has(a)) continue;
+ if (VALUE_FLAGS.has(a)) {
+  if (i + 1 >= args.length) {
+   console.error(`Error: Unknown option: missing value for ${a}`);
+   console.error(USAGE);
+   process.exit(1);
+  }
+  i += 1;
+  continue;
+ }
+ console.error(`Error: Unknown option: ${a}`);
+ console.error(USAGE);
+ process.exit(1);
+}
+
 if (args.includes('--list') || args.includes('-l')) {
  console.log('OpenLine Idea Layer — 12 Curated Starting Problems (Hypotheses Only, No Verified Demand):');
  sectors.forEach(([category, problem, title, repo, guard, firstTest], idx) => {
@@ -37,7 +58,7 @@ try {
  idea = generate(opts);
 } catch (err) {
  console.error(`Error: ${err.message}`);
- console.error('Usage: node export_brief.mjs --list | node export_brief.mjs --sector <0-11> --audience "<audience>" --format <service|toolkit|subscription> --budget <0-1000000> [--seed <n>] [--json]');
+ console.error(USAGE);
  process.exit(1);
 }
 if (args.includes('--json')) {

@@ -85,4 +85,9 @@ test('CLI errors are clean messages, not stack traces', () => {
   assert.doesNotMatch(caught.stderr, /\.mjs:\d+/);
   assert.doesNotMatch(caught.stderr, /\n\s+at\s/);
  }
+
+ // Verify README has no stale 19-test references
+ const readmeText = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+ assert.ok(!readmeText.includes('19-test') && !readmeText.includes('19/19'), 'README must not contain stale 19-test count');
+ assert.ok(readmeText.includes('20-test') && readmeText.includes('20/20'), 'README must state accurate 20-test count');
 });

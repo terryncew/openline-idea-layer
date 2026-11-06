@@ -1,6 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdirSync, readFileSync, writeFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
 import {generate, brief} from '../engine.mjs';
 
 const TARGET_SECTORS = [
@@ -44,7 +46,6 @@ test('six exported agent briefs (including regulated domains) vs ordinary manual
   const x = generate({sector: item.sector, audience: item.audience, format: item.format, budget: 0, seed: 0});
   const exportedBrief = brief(x);
   const briefPath = new URL(`../EVIDENCE/exported_briefs/${item.slug}.md`, import.meta.url);
-  writeFileSync(briefPath, exportedBrief, 'utf8');
   assert.equal(readFileSync(briefPath, 'utf8'), exportedBrief);
 
   const rc1Brief = exportedBrief
@@ -97,13 +98,13 @@ test('six exported agent briefs (including regulated domains) vs ordinary manual
  }
 
  writeFileSync(
-  new URL('../EVIDENCE/agent_brief_comparison.json', import.meta.url),
+  (process.env.WRITE_COMPARISON_EVIDENCE === '1' ? new URL('../EVIDENCE/agent_brief_comparison.json', import.meta.url) : join(tmpdir(), 'openline_idea_layer_agent_brief_comparison.json')),
   JSON.stringify({
    summary: {
     trials_built_and_verified: 6,
     manual_blank_score: '1/7',
     manual_filled_ordinary_score: '1/7 (missing domain safety boundary, acceptance test, zero-spend guard, demand falsifier/stop rule, and format packaging)',
-    competent_expert_manual_score: '7/7 (PARITY: a competent engineer or domain expert who manually authors all 7 sections achieves identical coding-agent build quality without Idea Layer, at the cost of ~8-12 minutes of manual specification writing per brief)',
+    competent_expert_manual_score: '7/7 (PARITY: a competent engineer or domain expert who manually authors all 7 sections achieves identical coding-agent build quality without Idea Layer, with no measured human time-saving claim)',
     rc1_exported_score: '5/7 (mixed human interview steps into coding-agent instructions and omitted audience/format packaging)',
     repaired_exported_score: '7/7 (all 6 exported briefs across civic, food-safety, security, energy, ADA accessibility, and minor-privacy education built into runnable prototypes with passing acceptance tests)'
    },

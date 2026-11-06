@@ -37,7 +37,7 @@ Existing OpenLine repositories linked from exported briefs (`openline-energy`, `
 
 - `node --test` suite: **20/20 PASS, 0 fail, 0 skip** (engine contract, customer contract, 6-sector brief-vs-manual-template comparison, and 6 exported-brief prototype trial suites across Public records `IL-3-0`, Food allergen `IL-8-0`, Security `IL-11-0`, Home energy `IL-1-0`, Accessibility `IL-4-0`, and Education minor-privacy `IL-6-0`).
 - Real headless Chromium verification across `320×640`, `390×844`, and `1280×850` viewports: all 12 sectors, live `$125` budget interpolation, invalid-budget `-50` fail-closed behavior, and file download verified with 0 console errors and 0 horizontal overflow.
-- Competent conventional baseline comparison: an ordinary 4-field manual template scores `1/7`, whereas a competent expert-authored manual specification achieves **`7/7 PARITY`** with Idea Layer's exported brief. Idea Layer saves ~8–12 minutes of manual specification authoring per brief for first-time builders; it does not prove market demand or outperform a domain expert's hand-written specification.
+- Competent conventional baseline comparison: an ordinary 4-field manual template scores `1/7`, whereas a competent expert-authored manual specification achieves **`7/7 PARITY`** with Idea Layer's exported brief. The test scores required sections, not human performance. An arithmetic illustration of 350–450 words at 35–45 words per minute is roughly 8–13 minutes; no timed user study establishes time saved. It does not prove market demand or outperform an expert's specification.
 
 ## Try the Public Challenge
 
@@ -52,7 +52,7 @@ It works with ordinary AI assistants, not only premium coding agents. Everything
 ## For Developers (Optional)
 
 ```sh
-# Run the complete 19-test suite (Node 18+)
+# Run the complete 20-test suite (Node 18+)
 node --test tests/*.test.mjs trials/compare_briefs_vs_manual_template.test.mjs trials/trial_*/test.mjs
 
 # Rebuild the deployable single-file index.html from modular source

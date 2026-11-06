@@ -17,7 +17,7 @@ Acceptance test: Unchecked entries never appear verified and no safety certifica
 
 ## Budget and safety boundaries
 Zero-dollar software/API target. Reuse hardware you own; time, electricity and optional hosting can still cost money.
-Human verification mandatory; never assert food safety certification
+Human verification mandatory; never assert food safety certification and always check jurisdiction-specific allergen-labeling rules (e.g., FDA FALCPA/FASTER Act major-9 or local health code)
 OpenLine repositories vary in maturity; inspect current README, security limitations, license, and exact commit before reuse. No live actions or production safety claims.
 Use free local tools. No paid APIs, accounts, deployment, outreach, payments, credentials or real-world actions without separate owner approval. Use fictional data only. Keep the prototype reversible and local-first.
 
@@ -38,8 +38,8 @@ Assumptions:
 Founder validation steps (human-run, outside the coding agent):
 1. Interview five potential users (small restaurant teams) without pitching a solution; note disconfirming evidence.
 2. Have a consenting user try the local fictional-data prototype without coaching.
-3. Run the cheapest falsifier before building automation: One seller validates the worksheet with staff.
-Cheapest falsifier: One seller validates the worksheet with staff
+3. Run the cheapest falsifier before building automation: One seller validates the worksheet with staff on a real menu and reuses it across a second menu update.
+Cheapest falsifier: One seller validates the worksheet with staff on a real menu and reuses it across a second menu update
 Stop/rethink rule: Stop or change direction if the first five qualified prospects do not confirm the problem; this is a proposed test, not market evidence.
 
 ## Instructions for the coding agent
@@ -49,7 +49,7 @@ Use ordinary HTML/CSS/JavaScript (e.g., `index.html`, `logic.mjs`, `test.mjs`) o
 Steps:
 1. Scaffold an offline, zero-dependency prototype (index.html + logic.mjs + test.mjs, or local Python) for: A menu/allergen worksheet with mandatory human-verification status and printable export.
 2. Tailor the workflow and export for small restaurant teams in toolkit mode (one neighborhood): Include a self-service editable template and deterministic JSON/Markdown export for small restaurant teams within one neighborhood.
-3. Enforce the hard safety boundary in both logic and visible UI labels: Human verification mandatory; never assert food safety certification.
+3. Enforce the hard safety boundary in both logic and visible UI labels: Human verification mandatory; never assert food safety certification and always check jurisdiction-specific allergen-labeling rules (e.g., FDA FALCPA/FASTER Act major-9 or local health code).
 4. Write and run an automated acceptance test suite (node --test test.mjs or python3 -m unittest) proving: Unchecked entries never appear verified and no safety certification is implied.
 
 Return runnable source, setup directions, at least one executable test verifying: Unchecked entries never appear verified and no safety certification is implied., and a plain-English explanation of assumptions, limitations and the next real-customer test. Mark PASS/PARTIAL/HOLD with evidence. Do not publish without owner approval.
